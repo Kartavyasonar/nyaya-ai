@@ -39,7 +39,7 @@ async def ask_query(request: QueryRequest):
     
     try:
         response = await groq_client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": request.query}
@@ -82,7 +82,7 @@ async def generate_document_text(request: dict):
     prompt = f"Generate a complete {doc_type.replace('_',' ')} legal document for Indian law. User: {user_details}. Details: {case_details}. Include proper legal citations, sections, and formal language."
     
     response = await groq_client.chat.completions.create(
-        model="llama3-70b-8192",
+        model="llama-3.3-70b-versatile",
         messages=[
             {"role": "system", "content": "You are an expert Indian lawyer. Generate complete, legally accurate documents with proper citations."},
             {"role": "user", "content": prompt}
