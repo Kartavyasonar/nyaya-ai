@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYAYA AI — आपका कानूनी सहायक | Free Legal Rights Assistant India</title>
+  <meta name="description" content="NYAYA AI - India's free AI-powered legal rights assistant. Get legal advice in Hindi, English and 20+ Indian languages. Know your rights. File RTI. Generate legal documents.">
+  <meta name="keywords" content="legal aid India, RTI filing, free lawyer India, NALSA, Indian legal rights, Hindi legal help">
+  <meta property="og:title" content="NYAYA AI — Free Legal Rights Assistant for India">
+  <meta property="og:description" content="Ask any legal question in your language. Free. Instant. Accurate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --bg2: #0d1426;
+      --bg3: #111827;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --b2: rgba(255,255,255,0.14);
+      --saffron: #ff9933;
+      --saffron2: #e8871a;
+      --green: #138808;
+      --green2: #16a34a;
+      --cyan: #06b6d4;
+      --cyan2: #0891b2;
+      --purple: #7c3aed;
+      --text: #f1f5f9;
+      --text2: #94a3b8;
+      --text3: #475569;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem; background: rgba(10,15,30,0.9);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--saffron), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 800; color: white; letter-spacing: -0.5px;
+    }
+    .nav-name { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+    .nav-name span { color: var(--saffron); }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--saffron); }
+    .nav-cta {
+      padding: 0.5rem 1.25rem; background: var(--saffron);
+      border: none; border-radius: 8px; color: white; font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--saffron2); transform: translateY(-1px); }
+    .lang-btn {
+      padding: 0.4rem 0.9rem; border: 1px solid var(--border);
+      background: var(--surface); border-radius: 6px; color: var(--text2);
+      font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+    }
+    .lang-btn:hover { border-color: var(--saffron); color: var(--saffron); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 100px 2rem 4rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,153,51,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem; border: 1px solid rgba(255,153,51,0.25);
+      background: rgba(255,153,51,0.06); border-radius: 20px;
+      font-size: 0.75rem; color: var(--saffron); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.2s var(--ease) both;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.3s var(--ease) both;
+    }
+    .hero-title .saffron { color: var(--saffron); }
+    .hero-title .green { color: var(--green2); }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text2);
+      max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7;
+      animation: fadeUp 0.7s 0.4s var(--ease) both;
+    }
+    .hero-lang-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+      margin-bottom: 3rem; animation: fadeUp 0.7s 0.5s var(--ease) both;
+    }
+    .lang-pill {
+      padding: 0.3rem 0.85rem; border: 1px solid var(--border);
+      background: var(--surface); border-radius: 20px;
+      font-size: 0.78rem; color: var(--text2);
+    }
+    .hero-search-wrap {
+      width: 100%; max-width: 700px;
+      animation: fadeUp 0.7s 0.6s var(--ease) both;
+    }
+    .hero-search {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--bg3); border: 1px solid var(--b2);
+      border-radius: 16px; padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+      box-shadow: 0 0 60px rgba(255,153,51,0.08);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .hero-search:focus-within {
+      border-color: rgba(255,153,51,0.4);
+      box-shadow: 0 0 60px rgba(255,153,51,0.12);
+    }
+    .search-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      font-size: 1rem; color: var(--text); font-family: var(--sans);
+      placeholder-color: var(--text3);
+    }
+    .search-input::placeholder { color: var(--text3); }
+    .search-btn {
+      padding: 0.75rem 1.75rem; background: var(--saffron);
+      border: none; border-radius: 10px; color: white;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; white-space: nowrap;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .search-btn:hover { background: var(--saffron2); }
+    .search-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .mic-btn {
+      padding: 0.75rem; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text2); cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mic-btn:hover { border-color: var(--saffron); color: var(--saffron); }
+    .mic-btn.listening { border-color: var(--saffron); color: var(--saffron); animation: micPulse 1s infinite; }
+    @keyframes micPulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,153,51,0.3)} 50%{box-shadow:0 0 0 8px rgba(255,153,51,0)} }
+    .hero-quick-links { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.25rem; }
+    .quick-link {
+      padding: 0.4rem 0.9rem; border: 1px solid var(--border);
+      background: var(--surface); border-radius: 8px;
+      font-size: 0.8rem; color: var(--text2); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quick-link:hover { border-color: var(--saffron); color: var(--saffron); background: rgba(255,153,51,0.06); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-n { font-size: 1.75rem; font-weight: 700; color: var(--saffron); font-family: var(--mono); }
+    .stat-l { font-size: 0.75rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* MAIN CHAT SECTION */
+    #chat-section {
+      max-width: 900px; margin: 0 auto; padding: 3rem 2rem;
+    }
+    .chat-container {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; min-height: 500px; display: flex; flex-direction: column;
+    }
+    .chat-header {
+      padding: 1rem 1.5rem; background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .chat-title { font-size: 0.9rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+    .online-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green2); animation: pulse 2s infinite; }
+    .chat-messages {
+      flex: 1; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;
+      max-height: 600px; overflow-y: auto; min-height: 300px;
+    }
+    .msg { display: flex; gap: 0.75rem; animation: fadeUp 0.3s var(--ease); }
+    .msg.user { flex-direction: row-reverse; }
+    .msg-avatar {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .msg-avatar.ai { background: linear-gradient(135deg, var(--saffron), var(--green)); }
+    .msg-avatar.user-av { background: var(--purple); color: white; font-size: 0.8rem; font-weight: 600; }
+    .msg-bubble {
+      max-width: 75%; padding: 0.875rem 1.125rem;
+      border-radius: 12px; font-size: 0.9rem; line-height: 1.7;
+    }
+    .msg.ai .msg-bubble { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+    .msg.user .msg-bubble { background: rgba(255,153,51,0.15); border: 1px solid rgba(255,153,51,0.2); color: var(--text); }
+    .msg-sources {
+      margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .source-chip {
+      padding: 0.2rem 0.6rem; background: rgba(6,182,212,0.08);
+      border: 1px solid rgba(6,182,212,0.2); border-radius: 4px;
+      font-family: var(--mono); font-size: 0.65rem; color: var(--cyan);
+    }
+    .helpline-chips { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .helpline-chip {
+      padding: 0.3rem 0.75rem; background: rgba(19,136,8,0.1);
+      border: 1px solid rgba(19,136,8,0.25); border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600; color: var(--green2);
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+    .lawyer-banner {
+      margin-top: 0.75rem; padding: 0.6rem 0.9rem;
+      background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 8px; font-size: 0.8rem; color: #a78bfa;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .loading-dots { display: flex; gap: 0.4rem; align-items: center; padding: 0.5rem 0; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text3); animation: dotBounce 1.2s infinite; }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotBounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
+
+    .chat-input-area {
+      padding: 1rem 1.5rem; border-top: 1px solid var(--border);
+      display: flex; gap: 0.75rem; align-items: center;
+    }
+    .chat-input {
+      flex: 1; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.75rem 1rem; color: var(--text);
+      font-size: 0.9rem; font-family: var(--sans); outline: none;
+      transition: border-color 0.2s; resize: none;
+    }
+    .chat-input:focus { border-color: rgba(255,153,51,0.4); }
+    .send-btn {
+      padding: 0.75rem 1.25rem; background: var(--saffron);
+      border: none; border-radius: 10px; color: white;
+      font-weight: 600; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;
+    }
+    .send-btn:hover { background: var(--saffron2); }
+    .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* FEATURES */
+    #features { padding: 5rem 2rem; background: var(--bg2); }
+    .section-label { font-family: var(--mono); font-size: 0.7rem; color: var(--saffron); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+    .section-title { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; text-align: center; margin-bottom: 1rem; }
+    .section-sub { color: var(--text2); text-align: center; max-width: 580px; margin: 0 auto 3.5rem; font-size: 1rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 1000px; margin: 0 auto; }
+    .feat-card {
+      padding: 1.75rem; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; transition: all 0.3s;
+    }
+    .feat-card:hover { border-color: rgba(255,153,51,0.25); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .feat-icon { font-size: 1.75rem; margin-bottom: 0.875rem; }
+    .feat-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .feat-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+    /* DOCUMENT GENERATOR */
+    #documents { padding: 5rem 2rem; background: var(--bg); }
+    .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+    .doc-card {
+      padding: 1.75rem; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; cursor: pointer; transition: all 0.3s;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .doc-card:hover { border-color: rgba(255,153,51,0.3); background: rgba(255,153,51,0.04); transform: translateY(-2px); }
+    .doc-icon { font-size: 2rem; }
+    .doc-name { font-size: 1.05rem; font-weight: 600; }
+    .doc-desc { font-size: 0.85rem; color: var(--text2); }
+    .doc-badge { font-family: var(--mono); font-size: 0.65rem; color: var(--green2); background: rgba(19,136,8,0.1); border: 1px solid rgba(19,136,8,0.2); padding: 0.2rem 0.6rem; border-radius: 20px; width: fit-content; }
+
+    /* DOC MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--b2); border-radius: 16px;
+      width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto;
+      transform: translateY(30px) scale(0.97); transition: transform 0.3s var(--ease);
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-head {
+      padding: 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; background: var(--bg2); z-index: 1;
+    }
+    .modal-title { font-size: 1.1rem; font-weight: 700; }
+    .modal-close { width: 32px; height: 32px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); color: var(--text2); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-size: 0.82rem; color: var(--text2); font-weight: 500; }
+    .form-input, .form-textarea {
+      padding: 0.7rem 0.9rem; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-size: 0.9rem; font-family: var(--sans);
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(255,153,51,0.4); }
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .generate-btn {
+      padding: 0.875rem; background: var(--saffron); border: none; border-radius: 10px;
+      color: white; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; margin-top: 0.5rem;
+    }
+    .generate-btn:hover { background: var(--saffron2); }
+    .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* HELPLINES */
+    #helplines { padding: 5rem 2rem; background: var(--bg2); }
+    .helplines-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+    .hl-card {
+      padding: 1.25rem; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; text-align: center; transition: all 0.2s;
+    }
+    .hl-card:hover { border-color: rgba(255,153,51,0.25); }
+    .hl-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .hl-number { font-family: var(--mono); font-size: 1.2rem; font-weight: 700; color: var(--saffron); margin-bottom: 0.3rem; }
+    .hl-name { font-size: 0.8rem; color: var(--text2); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem; border-top: 1px solid var(--border);
+      text-align: center; font-size: 0.82rem; color: var(--text3);
+      background: var(--bg2);
+    }
+    footer a { color: var(--saffron); text-decoration: none; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.875rem 1.5rem; font-size: 0.88rem; color: var(--text);
+      z-index: 500; transition: transform 0.3s var(--ease); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .doc-grid { grid-template-columns: 1fr; }
+      .helplines-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar { gap: 2rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .helplines-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo">⚖</div>
+    <span class="nav-name">NYAYA <span>AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#chat-section">Ask Question</a>
+    <a href="#documents">Documents</a>
+    <a href="#features">Features</a>
+    <a href="#helplines">Helplines</a>
+  </div>
+  <div style="display:flex;gap:0.75rem;align-items:center;">
+    <button class="lang-btn" onclick="toggleLang()">🌐 हिंदी / EN</button>
+    <a href="https://wa.me/14155238886?text=Namaste%20NYAYA%20AI" target="_blank" class="nav-cta">📱 WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Free · AI-Powered · 22 Indian Languages
+  </div>
+  <h1 class="hero-title">
+    Know Your <span class="saffron">Legal Rights</span><br>
+    <span class="green">In Your Language</span>
+  </h1>
+  <p class="hero-subtitle" id="hero-sub">
+    India's first AI legal assistant that explains your rights in plain language.
+    Ask about FIR, RTI, Labour Rights, Schemes, Property — anything. Free. Instant.
+  </p>
+  <div class="hero-lang-pills">
+    <span class="lang-pill">हिंदी</span>
+    <span class="lang-pill">தமிழ்</span>
+    <span class="lang-pill">తెలుగు</span>
+    <span class="lang-pill">मराठी</span>
+    <span class="lang-pill">বাংলা</span>
+    <span class="lang-pill">ਪੰਜਾਬੀ</span>
+    <span class="lang-pill">ગુજરાતી</span>
+    <span class="lang-pill">English</span>
+    <span class="lang-pill">+14 more</span>
+  </div>
+  <div class="hero-search-wrap">
+    <div class="hero-search">
+      <button class="mic-btn" id="mic-btn" onclick="toggleMic()" title="Voice input">🎤</button>
+      <input
+        type="text"
+        class="search-input"
+        id="hero-input"
+        placeholder="मेरा मालिक वेतन नहीं दे रहा... / My landlord is harassing me... / RTI कैसे दाखिल करें?"
+        onkeydown="if(event.key==='Enter')askFromHero()"
+      />
+      <button class="search-btn" onclick="askFromHero()" id="hero-btn">
+        ⚖️ Ask NYAYA
+      </button>
+    </div>
+    <div class="hero-quick-links">
+      <button class="quick-link" onclick="quickAsk('FIR कैसे दाखिल करें? Police complaint process')">🚔 FIR Filing</button>
+      <button class="quick-link" onclick="quickAsk('मुझे RTI कैसे फाइल करनी है? Step by step guide')">📋 File RTI</button>
+      <button class="quick-link" onclick="quickAsk('मेरे मालिक ने बिना नोटिस के नौकरी से निकाल दिया, मेरे क्या अधिकार हैं?')">💼 Labour Rights</button>
+      <button class="quick-link" onclick="quickAsk('Ayushman Bharat scheme eligibility and how to apply')">🏥 PM Schemes</button>
+      <button class="quick-link" onclick="quickAsk('Domestic violence help - what can I do and where to go?')">👩 Women Rights</button>
+      <button class="quick-link" onclick="quickAsk('मकान मालिक बिजली पानी बंद कर रहा है बेदखल करने के लिए, मेरे क्या अधिकार हैं?')">🏠 Tenant Rights</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n" id="s1">0</div><div class="stat-l">Queries Answered</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">Indian Languages</div></div>
+  <div class="stat"><div class="stat-n">800+</div><div class="stat-l">Govt Schemes Covered</div></div>
+  <div class="stat"><div class="stat-n">FREE</div><div class="stat-l">Always & Forever</div></div>
+</div>
+
+<!-- CHAT SECTION -->
+<section id="chat-section">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <div class="section-label">Ask Anything</div>
+    <h2 class="section-title">Your Personal <span style="color:var(--saffron)">Legal Assistant</span></h2>
+  </div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-title">
+        <div class="online-dot"></div>
+        NYAYA AI — Legal Assistant
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <button onclick="clearChat()" style="padding:0.35rem 0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:0.75rem;cursor:pointer;">Clear</button>
+        <select id="lang-select" onchange="changeLang(this.value)" style="padding:0.35rem 0.65rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:0.75rem;cursor:pointer;outline:none;">
+          <option value="auto">Auto Detect</option>
+          <option value="hi">हिंदी</option>
+          <option value="en">English</option>
+          <option value="mr">मराठी</option>
+          <option value="ta">தமிழ்</option>
+          <option value="te">తెలుగు</option>
+          <option value="bn">বাংলা</option>
+          <option value="gu">ગુજરાતી</option>
+          <option value="pa">ਪੰਜਾਬੀ</option>
+        </select>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <!-- Welcome message -->
+      <div class="msg ai">
+        <div class="msg-avatar ai">⚖</div>
+        <div class="msg-bubble">
+          <strong>नमस्ते! मैं NYAYA AI हूँ। 🙏</strong><br><br>
+          मैं आपकी हर कानूनी समस्या में मदद करूँगा — बिल्कुल मुफ्त, आपकी भाषा में।<br><br>
+          <strong>आप मुझसे पूछ सकते हैं:</strong><br>
+          ⚖️ FIR और पुलिस शिकायत<br>
+          💼 नौकरी और मजदूरी के अधिकार<br>
+          🏠 किराया और ज़मीन के अधिकार<br>
+          👩 महिला अधिकार और घरेलू हिंसा<br>
+          📋 RTI कैसे दाखिल करें<br>
+          🏥 सरकारी योजनाएं और लाभ<br><br>
+          <div class="helpline-chips">
+            <div class="helpline-chip">🆘 Emergency: 112</div>
+            <div class="helpline-chip">👩 Women: 181</div>
+            <div class="helpline-chip">⚖️ Free Legal Aid: 15100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <button class="mic-btn" id="chat-mic" onclick="toggleChatMic()" title="Voice input">🎤</button>
+      <textarea
+        class="chat-input"
+        id="chat-input"
+        placeholder="अपना सवाल यहाँ लिखें... / Type your question here..."
+        rows="1"
+        onkeydown="handleChatKey(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">
+        Send ➤
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Why NYAYA AI</div>
+  <h2 class="section-title">Built for <span style="color:var(--saffron)">Bharat</span></h2>
+  <p class="section-sub">Designed for 700 million Indians who can't afford a lawyer but deserve justice.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🗣️</div>
+      <div class="feat-title">22 Indian Languages</div>
+      <div class="feat-desc">Ask in Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati and 16 more. Even voice input supported.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📚</div>
+      <div class="feat-title">Atomic Legal Knowledge</div>
+      <div class="feat-desc">Every Act, Section, Supreme Court judgment indexed. Constitution, IPC/BNS, Labour codes, RTI, Consumer law — all covered.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📄</div>
+      <div class="feat-title">Auto-Generate Documents</div>
+      <div class="feat-desc">RTI applications, legal notices, FIR drafts, consumer complaints — generated instantly, downloadable as PDF.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📱</div>
+      <div class="feat-title">WhatsApp Native</div>
+      <div class="feat-desc">Works on WhatsApp — zero friction. No app download. Every Indian already has it.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <div class="feat-title">Step-by-Step Actions</div>
+      <div class="feat-desc">Not just laws — exact steps to take, forms to fill, offices to visit, helplines to call. Actionable every time.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-title">Private & Secure</div>
+      <div class="feat-desc">Your questions are never shared. No personal data required. Anonymous use supported.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENT GENERATOR -->
+<section id="documents">
+  <div class="section-label">Legal Documents</div>
+  <h2 class="section-title">Generate Legal Documents <span style="color:var(--saffron)">Instantly</span></h2>
+  <p class="section-sub">Professional legal documents in minutes. Download as PDF. Free forever.</p>
+  <div class="doc-grid">
+    <div class="doc-card" onclick="openDocModal('rti_application')">
+      <div class="doc-icon">📋</div>
+      <div class="doc-badge">✅ Free</div>
+      <div class="doc-name">RTI Application</div>
+      <div class="doc-desc">File Right to Information application to any government department. Auto-fills PIO details and section references.</div>
+    </div>
+    <div class="doc-card" onclick="openDocModal('legal_notice')">
+      <div class="doc-icon">⚖️</div>
+      <div class="doc-badge">✅ Free</div>
+      <div class="doc-name">Legal Notice</div>
+      <div class="doc-desc">Send formal legal notice to landlord, employer, contractor, or anyone violating your rights. Proper CPC format.</div>
+    </div>
+    <div class="doc-card" onclick="openDocModal('consumer_complaint')">
+      <div class="doc-icon">🛡️</div>
+      <div class="doc-badge">✅ Free</div>
+      <div class="doc-name">Consumer Complaint</div>
+      <div class="doc-desc">File complaint before District Consumer Commission. For defective products, fraud, insurance rejection, builder delays.</div>
+    </div>
+    <div class="doc-card" onclick="openDocModal('police_complaint')">
+      <div class="doc-icon">🚔</div>
+      <div class="doc-badge">✅ Free</div>
+      <div class="doc-name">Police Complaint / FIR</div>
+      <div class="doc-desc">Draft FIR or police complaint with correct BNS/IPC sections. If police refuse to file — use this to escalate.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HELPLINES -->
+<section id="helplines">
+  <div class="section-label">Emergency Help</div>
+  <h2 class="section-title">Important <span style="color:var(--saffron)">Helpline Numbers</span></h2>
+  <p class="section-sub">Immediate help is always a call away. All helplines are free.</p>
+  <div class="helplines-grid">
+    <div class="hl-card"><div class="hl-icon">🆘</div><div class="hl-number">112</div><div class="hl-name">All Emergency</div></div>
+    <div class="hl-card"><div class="hl-icon">👮</div><div class="hl-number">100</div><div class="hl-name">Police</div></div>
+    <div class="hl-card"><div class="hl-icon">👩</div><div class="hl-number">181</div><div class="hl-name">Women Helpline</div></div>
+    <div class="hl-card"><div class="hl-icon">👶</div><div class="hl-number">1098</div><div class="hl-name">Child Helpline</div></div>
+    <div class="hl-card"><div class="hl-icon">⚖️</div><div class="hl-number">15100</div><div class="hl-name">Free Legal Aid (NALSA)</div></div>
+    <div class="hl-card"><div class="hl-icon">🏥</div><div class="hl-number">14555</div><div class="hl-name">Ayushman Bharat</div></div>
+    <div class="hl-card"><div class="hl-icon">💼</div><div class="hl-number">1800-11-0001</div><div class="hl-name">Labour Ministry</div></div>
+    <div class="hl-card"><div class="hl-icon">🛡️</div><div class="hl-number">14404</div><div class="hl-name">Consumer Helpline</div></div>
+    <div class="hl-card"><div class="hl-icon">🌾</div><div class="hl-number">155261</div><div class="hl-name">PM Kisan</div></div>
+    <div class="hl-card"><div class="hl-icon">💻</div><div class="hl-number">1930</div><div class="hl-name">Cyber Crime</div></div>
+    <div class="hl-card"><div class="hl-icon">👴</div><div class="hl-number">14567</div><div class="hl-name">Senior Citizens</div></div>
+    <div class="hl-card"><div class="hl-icon">🧠</div><div class="hl-number">9152987821</div><div class="hl-name">Mental Health (iCall)</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;font-size:1rem;font-weight:600;color:var(--text);">⚖️ NYAYA AI — न्याय सबके लिए | Justice for Every Indian</p>
+  <p>Made with ❤️ for 700 million Indians who deserve legal justice. Always free.</p>
+  <p style="margin-top:0.75rem;">
+    <a href="https://github.com/Kartavyasonar" target="_blank">GitHub</a> ·
+    <a href="https://wa.me/14155238886" target="_blank">WhatsApp Bot</a> ·
+    <a href="https://nalsa.gov.in" target="_blank">NALSA Free Legal Aid</a>
+  </p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;">Disclaimer: NYAYA AI provides legal information, not legal advice. For complex matters, consult a qualified lawyer.</p>
+</footer>
+
+<!-- DOCUMENT MODAL -->
+<div class="modal-overlay" id="doc-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title">Generate Document</div>
+      <button class="modal-close" onclick="closeDocModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+const API_BASE = '/api/v1';
+let sessionId = localStorage.getItem('nyaya_session') || null;
+let isLoading = false;
+let recognition = null;
+let isListening = false;
+let currentLang = 'auto';
+let isHindi = false;
+
+// ═══════════════════════════════════════════════════════════
+// COUNTER ANIMATION
+// ═══════════════════════════════════════════════════════════
+function animateCounter(el, target, duration = 2000) {
+  const start = performance.now();
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = Math.floor(ease * target);
+    el.textContent = val > 999 ? (val / 1000).toFixed(1) + 'K' : val;
+    if (t < 1) requestAnimationFrame(update);
+    else el.textContent = target > 999 ? (target / 1000).toFixed(0) + 'K+' : target + '+';
+  }
+  requestAnimationFrame(update);
+}
+
+window.addEventListener('load', () => {
+  animateCounter(document.getElementById('s1'), 12483);
+});
+
+// ═══════════════════════════════════════════════════════════
+// LANGUAGE TOGGLE
+// ═══════════════════════════════════════════════════════════
+function toggleLang() {
+  isHindi = !isHindi;
+  const sub = document.getElementById('hero-sub');
+  if (isHindi) {
+    sub.textContent = 'भारत का पहला AI कानूनी सहायक जो आपके अधिकारों को सरल भाषा में समझाता है। FIR, RTI, श्रम अधिकार, योजनाएं — कुछ भी पूछें। बिल्कुल मुफ्त।';
+    document.getElementById('hero-input').placeholder = 'मेरा मालिक तनख्वाह नहीं दे रहा... / किरायेदार को कैसे निकालें?';
+  } else {
+    sub.textContent = "India's first AI legal assistant that explains your rights in plain language. Ask about FIR, RTI, Labour Rights, Schemes, Property — anything. Free. Instant.";
+    document.getElementById('hero-input').placeholder = 'मेरा मालिक वेतन नहीं दे रहा... / My landlord is harassing me...';
+  }
+}
+
+function changeLang(val) {
+  currentLang = val;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CHAT CORE
+// ═══════════════════════════════════════════════════════════
+function scrollToChat() {
+  document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function askFromHero() {
+  const q = document.getElementById('hero-input').value.trim();
+  if (!q) return;
+  document.getElementById('chat-input').value = q;
+  scrollToChat();
+  setTimeout(() => sendMessage(), 600);
+}
+
+function quickAsk(q) {
+  document.getElementById('chat-input').value = q;
+  scrollToChat();
+  setTimeout(() => sendMessage(), 600);
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function clearChat() {
+  const msgs = document.getElementById('chat-messages');
+  msgs.innerHTML = `
+    <div class="msg ai">
+      <div class="msg-avatar ai">⚖</div>
+      <div class="msg-bubble">
+        Chat cleared. नमस्ते! Ask me anything about your legal rights. 🙏<br>
+        <div class="helpline-chips" style="margin-top:0.75rem;">
+          <div class="helpline-chip">🆘 112</div>
+          <div class="helpline-chip">👩 181</div>
+          <div class="helpline-chip">⚖️ 15100</div>
+        </div>
+      </div>
+    </div>`;
+  sessionId = null;
+  localStorage.removeItem('nyaya_session');
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const query = input.value.trim();
+  if (!query || isLoading) return;
+
+  isLoading = true;
+  document.getElementById('send-btn').disabled = true;
+  input.value = '';
+  input.style.height = 'auto';
+
+  // Add user message
+  appendMessage('user', query);
+
+  // Add loading indicator
+  const loadingId = appendLoading();
+
+  try {
+    const res = await fetch(`${API_BASE}/query/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        session_id: sessionId,
+        channel: 'web',
+        language: currentLang !== 'auto' ? currentLang : undefined,
+      }),
+    });
+
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+
+    sessionId = data.session_id;
+    localStorage.setItem('nyaya_session', sessionId);
+
+    removeLoading(loadingId);
+    appendAIMessage(data);
+
+  } catch (err) {
+    removeLoading(loadingId);
+    appendMessage('ai', `Sorry, I'm having trouble connecting. Please try again.\n\n🆘 Emergency: 112\n⚖️ Free Legal Aid: 15100\n👩 Women Helpline: 181`);
+  } finally {
+    isLoading = false;
+    document.getElementById('send-btn').disabled = false;
+  }
+}
+
+function appendMessage(role, content) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role === 'user' ? 'user' : 'ai'}`;
+  div.innerHTML = `
+    <div class="msg-avatar ${role === 'user' ? 'user-av' : 'ai'}">${role === 'user' ? 'YOU' : '⚖'}</div>
+    <div class="msg-bubble">${content.replace(/\n/g, '<br>')}</div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function appendAIMessage(data) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+
+  let sourcesHtml = '';
+  if (data.sources && data.sources.length > 0) {
+    sourcesHtml = `<div class="msg-sources">`;
+    data.sources.slice(0, 4).forEach(s => {
+      const label = s.section ? `${s.act}, ${s.section}` : s.act;
+      sourcesHtml += `<div class="source-chip">📖 ${label.substring(0, 50)}</div>`;
+    });
+    sourcesHtml += `</div>`;
+  }
+
+  let helplinesHtml = '';
+  if (data.suggested_helplines && data.suggested_helplines.length > 0) {
+    helplinesHtml = `<div class="helpline-chips">`;
+    data.suggested_helplines.forEach(h => {
+      helplinesHtml += `<div class="helpline-chip">📞 ${h}</div>`;
+    });
+    helplinesHtml += `</div>`;
+  }
+
+  let lawyerHtml = '';
+  if (data.needs_lawyer) {
+    lawyerHtml = `<div class="lawyer-banner">⚖️ This matter may require legal representation. <strong>Free lawyer: Call 15100 (NALSA)</strong></div>`;
+  }
+
+  const responseHtml = formatResponse(data.response);
+
+  div.innerHTML = `
+    <div class="msg-avatar ai">⚖</div>
+    <div class="msg-bubble">
+      ${responseHtml}
+      ${sourcesHtml}
+      ${helplinesHtml}
+      ${lawyerHtml}
+    </div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function formatResponse(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/^### (.*)/gm, '<h4 style="margin:0.75rem 0 0.35rem;color:var(--saffron)">$1</h4>')
+    .replace(/^## (.*)/gm, '<h3 style="margin:0.75rem 0 0.35rem;color:var(--saffron)">$1</h3>')
+    .replace(/^# (.*)/gm, '<h3 style="margin:0.75rem 0 0.35rem;color:var(--saffron)">$1</h3>')
+    .replace(/^- (.*)/gm, '• $1')
+    .replace(/\n/g, '<br>');
+}
+
+function appendLoading() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  const id = 'loading-' + Date.now();
+  div.id = id;
+  div.className = 'msg ai';
+  div.innerHTML = `
+    <div class="msg-avatar ai">⚖</div>
+    <div class="msg-bubble">
+      <div class="loading-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span style="font-size:0.8rem;color:var(--text3);margin-left:0.5rem">Searching legal database...</span>
+      </div>
+    </div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return id;
+}
+
+function removeLoading(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ═══════════════════════════════════════════════════════════
+// VOICE INPUT
+// ═══════════════════════════════════════════════════════════
+function initSpeechRecognition() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return null;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  r.continuous = false;
+  r.interimResults = true;
+  r.lang = currentLang !== 'auto' ? currentLang + '-IN' : 'hi-IN';
+  return r;
+}
+
+function toggleMic() {
+  const btn = document.getElementById('mic-btn');
+  const input = document.getElementById('hero-input');
+  toggleMicForInput(btn, input);
+}
+
+function toggleChatMic() {
+  const btn = document.getElementById('chat-mic');
+  const input = document.getElementById('chat-input');
+  toggleMicForInput(btn, input);
+}
+
+function toggleMicForInput(btn, input) {
+  if (isListening) {
+    if (recognition) recognition.stop();
+    isListening = false;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤';
+    return;
+  }
+
+  recognition = initSpeechRecognition();
+  if (!recognition) {
+    showToast('Voice not supported in this browser. Try Chrome.');
+    return;
+  }
+
+  recognition.onresult = (e) => {
+    const transcript = Array.from(e.results).map(r => r[0].transcript).join('');
+    input.value = transcript;
+    if (input.id === 'chat-input') autoResize(input);
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤';
+  };
+
+  recognition.onerror = () => {
+    isListening = false;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤';
+  };
+
+  recognition.start();
+  isListening = true;
+  btn.classList.add('listening');
+  btn.textContent = '🔴';
+}
+
+// ═══════════════════════════════════════════════════════════
+// DOCUMENT GENERATOR
+// ═══════════════════════════════════════════════════════════
+const DOC_CONFIGS = {
+  rti_application: {
+    title: '📋 RTI Application Generator',
+    fields: [
+      { key: 'user.name', label: 'Your Full Name', placeholder: 'Rajesh Kumar', required: true },
+      { key: 'user.address', label: 'Your Complete Address', placeholder: 'Village, District, State, PIN', required: true, textarea: true },
+      { key: 'user.phone', label: 'Mobile Number', placeholder: '9876543210', required: true },
+      { key: 'case.authority', label: 'Public Authority (Govt Dept)', placeholder: 'District Collector Office, Pune', required: true },
+      { key: 'case.department', label: 'Department / Officer', placeholder: 'Public Information Officer', required: true },
+      { key: 'case.information_needed', label: 'Information You Want', placeholder: 'Status of my ration card application filed on DD/MM/YYYY...', required: true, textarea: true },
+      { key: 'case.time_period', label: 'Time Period', placeholder: 'Last 3 years / Since 2022', required: false },
+    ],
+  },
+  legal_notice: {
+    title: '⚖️ Legal Notice Generator',
+    fields: [
+      { key: 'user.name', label: 'Your Name (Sender)', placeholder: 'Priya Singh', required: true },
+      { key: 'user.address', label: 'Your Address', placeholder: 'Your complete address', required: true, textarea: true },
+      { key: 'case.respondent_name', label: 'Recipient Name', placeholder: 'Landlord / Employer name', required: true },
+      { key: 'case.respondent_address', label: 'Recipient Address', placeholder: "Recipient's complete address", required: true, textarea: true },
+      { key: 'case.issue', label: 'Describe the Issue', placeholder: 'Landlord has not returned security deposit of ₹50,000 despite vacating on 01/03/2024...', required: true, textarea: true },
+      { key: 'case.relief', label: 'What You Want (Relief)', placeholder: 'Return of ₹50,000 security deposit with interest', required: true },
+      { key: 'case.notice_period', label: 'Notice Period', placeholder: '15 days', required: false },
+    ],
+  },
+  consumer_complaint: {
+    title: '🛡️ Consumer Complaint Generator',
+    fields: [
+      { key: 'user.name', label: 'Your Name', placeholder: 'Amit Sharma', required: true },
+      { key: 'user.address', label: 'Your Address', placeholder: 'Your complete address', required: true, textarea: true },
+      { key: 'case.company_name', label: 'Company / Business Name', placeholder: 'Reliance Digital, Amazon India, HDFC Bank', required: true },
+      { key: 'case.company_address', label: 'Company Address', placeholder: 'Company office address', required: true },
+      { key: 'case.product', label: 'Product / Service', placeholder: 'Samsung TV Model X1234 / Life Insurance Policy', required: true },
+      { key: 'case.purchase_date', label: 'Date of Purchase', placeholder: 'DD/MM/YYYY', required: true },
+      { key: 'case.amount', label: 'Amount Paid (₹)', placeholder: '25000', required: true },
+      { key: 'case.problem', label: 'Problem Faced', placeholder: 'Product stopped working after 2 months, company refused to repair under warranty...', required: true, textarea: true },
+    ],
+  },
+  police_complaint: {
+    title: '🚔 Police Complaint / FIR Draft',
+    fields: [
+      { key: 'user.name', label: 'Your Name (Complainant)', placeholder: 'Sunita Devi', required: true },
+      { key: 'user.address', label: 'Your Address', placeholder: 'Village / Mohalla, District, State', required: true, textarea: true },
+      { key: 'user.phone', label: 'Mobile Number', placeholder: '9876543210', required: true },
+      { key: 'case.incident_date', label: 'Date of Incident', placeholder: 'DD/MM/YYYY', required: true },
+      { key: 'case.incident_place', label: 'Place of Incident', placeholder: 'Near Shiv temple, Main road, Village X', required: true },
+      { key: 'case.accused', label: 'Accused Person(s)', placeholder: 'Ramesh Yadav, son of..., address... / Unknown', required: false },
+      { key: 'case.incident_details', label: 'What Happened (Describe in Detail)', placeholder: 'On DD/MM/YYYY at approximately X PM, the accused...', required: true, textarea: true },
+      { key: 'case.witnesses', label: 'Witnesses (if any)', placeholder: 'Names and addresses of witnesses', required: false },
+    ],
+  },
+};
+
+function openDocModal(docType) {
+  const config = DOC_CONFIGS[docType];
+  if (!config) return;
+
+  document.getElementById('modal-title').textContent = config.title;
+
+  let fieldsHtml = '';
+  const grouped = [];
+  let i = 0;
+  while (i < config.fields.length) {
+    const f = config.fields[i];
+    if (!f.textarea && i + 1 < config.fields.length && !config.fields[i + 1].textarea) {
+      grouped.push([config.fields[i], config.fields[i + 1]]);
+      i += 2;
+    } else {
+      grouped.push([f]);
+      i++;
+    }
+  }
+
+  grouped.forEach(group => {
+    if (group.length === 2) {
+      fieldsHtml += `<div class="form-grid">`;
+      group.forEach(f => {
+        fieldsHtml += renderField(f, docType);
+      });
+      fieldsHtml += `</div>`;
+    } else {
+      fieldsHtml += renderField(group[0], docType);
+    }
+  });
+
+  document.getElementById('modal-body').innerHTML = `
+    ${fieldsHtml}
+    <button class="generate-btn" onclick="generateDocument('${docType}')" id="gen-btn">
+      ⬇️ Generate & Download PDF
+    </button>
+    <div id="gen-status" style="text-align:center;font-size:0.82rem;color:var(--text2);display:none;">
+      ⏳ Generating your document... This takes 10-15 seconds.
+    </div>
+  `;
+
+  document.getElementById('doc-modal').classList.add('open');
+}
+
+function renderField(f, docType) {
+  const [section, fieldKey] = f.key.split('.');
+  const id = `${docType}_${section}_${fieldKey}`;
+  if (f.textarea) {
+    return `<div class="form-group">
+      <label class="form-label">${f.label}${f.required ? ' *' : ''}</label>
+      <textarea class="form-textarea" id="${id}" placeholder="${f.placeholder}" rows="3"></textarea>
+    </div>`;
+  }
+  return `<div class="form-group">
+    <label class="form-label">${f.label}${f.required ? ' *' : ''}</label>
+    <input type="text" class="form-input" id="${id}" placeholder="${f.placeholder}">
+  </div>`;
+}
+
+function closeDocModal() {
+  document.getElementById('doc-modal').classList.remove('open');
+}
+
+function getFieldValue(docType, key) {
+  const [section, fieldKey] = key.split('.');
+  const el = document.getElementById(`${docType}_${section}_${fieldKey}`);
+  return el ? el.value.trim() : '';
+}
+
+async function generateDocument(docType) {
+  const config = DOC_CONFIGS[docType];
+  const btn = document.getElementById('gen-btn');
+  const status = document.getElementById('gen-status');
+
+  // Collect values
+  const user_details = {};
+  const case_details = {};
+
+  let hasError = false;
+  config.fields.forEach(f => {
+    const val = getFieldValue(docType, f.key);
+    const [section, key] = f.key.split('.');
+    if (section === 'user') user_details[key] = val;
+    else case_details[key] = val;
+
+    if (f.required && !val) {
+      hasError = true;
+      const el = document.getElementById(`${docType}_${section}_${key}`);
+      if (el) { el.style.borderColor = 'rgba(239,68,68,0.5)'; setTimeout(() => el.style.borderColor = '', 2000); }
+    }
+  });
+
+  if (hasError) {
+    showToast('Please fill all required fields (marked with *)');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Generating...';
+  status.style.display = 'block';
+
+  try {
+    const res = await fetch(`${API_BASE}/documents/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        doc_type: docType,
+        user_details,
+        case_details,
+        language: currentLang !== 'auto' ? currentLang : 'en',
+        generate_pdf: true,
+      }),
+    });
+
+    if (!res.ok) throw new Error('Generation failed');
+
+    // Download PDF
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `nyaya_${docType}_${new Date().toISOString().slice(0, 10)}.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast('✅ Document generated and downloaded!');
+    closeDocModal();
+
+  } catch (err) {
+    // Fallback: show text version in chat
+    showToast('PDF generation failed. Getting text version...');
+    try {
+      const res2 = await fetch(`${API_BASE}/documents/generate-text`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ doc_type: docType, user_details, case_details, language: 'en', generate_pdf: false }),
+      });
+      const data = await res2.json();
+      document.getElementById('chat-input').value = `Here is my generated ${docType.replace('_', ' ')}:\n\n${data.content.substring(0, 300)}...`;
+      closeDocModal();
+      scrollToChat();
+      appendMessage('ai', `<strong>Generated Document (${docType.replace('_', ' ').toUpperCase()}):</strong><br><br>${data.content.replace(/\n/g, '<br>').substring(0, 2000)}`);
+    } catch (e2) {
+      showToast('Error generating document. Please try again.');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '⬇️ Generate & Download PDF';
+    status.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════
+function showToast(msg, duration = 3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+// ═══════════════════════════════════════════════════════════
+// CLOSE MODAL ON BG CLICK
+// ═══════════════════════════════════════════════════════════
+document.getElementById('doc-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeDocModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDocModal();
+});
+</script>
+</body>
+</html>

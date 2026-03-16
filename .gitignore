@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+venv/
+env/
+.venv/
+.env
+*.env
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+dist/
+.next/
+
+# Data / Models (too large for git)
+data/vectorstore/*.faiss
+data/vectorstore/*.pkl
+data/raw/*.pdf
+*.bin
+*.pt
+*.safetensors
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Docker
+.docker/
+
+# Secrets
+.env.local
+.env.production
+secrets/
