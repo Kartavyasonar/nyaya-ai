@@ -1,5 +1,5 @@
-"""
-NYAYA AI — RAG Pipeline
+﻿"""
+NYAYA AI â€” RAG Pipeline
 Hybrid retrieval: Dense (FAISS) + Sparse (BM25) + Reranking
 """
 import os
@@ -74,19 +74,17 @@ class NyayaRAGPipeline:
         if self._initialized:
             return
 
-        logger.info("🧠 Initializing RAG pipeline...")
+        logger.info("ðŸ§  Initializing RAG pipeline...")
 
         # Load multilingual embedding model (supports all 22 Indian languages)
         logger.info("Loading embedding model...")
         self.embedding_model = SentenceTransformer(
-            "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+            "all-MiniLM-L6-v2"
         )
 
         # Load cross-encoder for reranking
         logger.info("Loading reranker model...")
-        self.reranker = CrossEncoder(
-            "cross-encoder/ms-marco-MiniLM-L-6-v2"
-        )
+        self.reranker = None
 
         # Load or create FAISS index
         if self.index_path.with_suffix(".faiss").exists():
@@ -97,7 +95,7 @@ class NyayaRAGPipeline:
             await self._build_initial_index()
 
         self._initialized = True
-        logger.info(f"✅ RAG pipeline ready. {len(self.documents)} documents indexed.")
+        logger.info(f"âœ… RAG pipeline ready. {len(self.documents)} documents indexed.")
 
     async def _build_initial_index(self):
         """Build FAISS index from legal data files"""
@@ -150,7 +148,7 @@ class NyayaRAGPipeline:
 
         # Save index
         await self._save_index()
-        logger.info(f"✅ Indexed {len(documents)} documents")
+        logger.info(f"âœ… Indexed {len(documents)} documents")
 
     async def retrieve(
         self,
