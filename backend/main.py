@@ -61,7 +61,7 @@ async def lifespan(app: FastAPI):
     # Startup
     logger.info("ðŸš€ Starting NYAYA AI...")
     await connect_db()
-    await rag_pipeline.initialize()
+    # RAG loads lazily on first query
     logger.info("âœ… NYAYA AI is ready to serve justice!")
     yield
     # Shutdown
