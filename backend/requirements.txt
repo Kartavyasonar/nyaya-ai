@@ -1,4 +1,4 @@
-# Core Framework
+﻿# Core Framework
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
 python-multipart==0.0.9
@@ -20,7 +20,6 @@ rank-bm25==0.2.2
 
 # Hugging Face
 transformers==4.41.2
-torch==2.9.0
 huggingface-hub==0.23.2
 datasets==2.19.1
 
